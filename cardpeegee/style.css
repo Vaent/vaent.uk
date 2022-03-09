@@ -1,0 +1,37 @@
+header{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 950px;
+}
+
+nav{
+	position: absolute;
+	top: 300px;
+	left: 20px;
+	width: 250px;
+	line-height: 1.2;
+	margin: 50px;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+main{
+	position: absolute;
+	top: 210px;
+	left: 270px;
+	width: 700px;
+}
+
+#content a{
+	font-size: 0.9em;
+}
+#content p{
+	clear: both;
+	font: 1.2em sans-serif;
+}
+
+.icon{
+	float: left;
+	margin: 32px;
+}
