@@ -1,0 +1,39 @@
+body {
+    background-color: black;
+    color: LightGrey;
+    font-family: sans-serif;
+}
+
+header {
+    font-size: 3em;
+}
+header span {
+    display: inline-block;
+    margin: 20px;
+}
+
+main div {
+    max-width: 55em;
+    margin: 30px;
+    margin-top: 50px;
+}
+
+a {
+    color: HotPink;
+    font-weight: bold;
+}
+a:visited {
+    color: MediumOrchid;
+}
+
+span.vaent-title {
+    color: SteelBlue;
+    font-family: "Lucida Handwriting", cursive;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.comment {
+    font-size: 70%;
+    margin: 0;
+}
