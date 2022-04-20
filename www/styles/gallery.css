@@ -1,0 +1,21 @@
+div.image-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #666666;
+    margin: 30px;
+}
+
+span.thumbnail {
+    display: inline-flex;
+    background-color: #555555;
+    border: solid white;
+    margin: 30px 20px;
+}
+
+span.thumbnail img {
+    height: 160px;
+    width: 200px;
+    object-fit: contain;
+}
