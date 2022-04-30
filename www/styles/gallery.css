@@ -19,3 +19,29 @@ span.thumbnail img {
     width: 200px;
     object-fit: contain;
 }
+
+span.thumbnail img[onclick] {
+    cursor: zoom-in;
+}
+
+#expanded-image-overlay {
+    all: unset;
+    display: none;
+    position: fixed;
+    background-color: #333333EE;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    cursor: zoom-out;
+}
+
+#expanded-image {
+    display: block;
+    position: absolute;
+    max-height: 100%;
+    max-width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

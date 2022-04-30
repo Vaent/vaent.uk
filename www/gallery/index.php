@@ -8,7 +8,7 @@
     </head>
     <body>
         <div style="text-align:center;padding:30px">
-            This page is still in development. For now it only has thumbnail samples; larger images will be available once the necessary work is completed.
+            This page is still in development. More images and options are on the way!
         </div>
         <div class="image-group">
             <?php
@@ -21,16 +21,31 @@
                 }
 
                 foreach ($images as $image) {
-                    $filename = "{$image['image_name']}-thumb.png";
-                    if (file_exists("images/thumbs/$filename")) {
+                    $filename = "{$image['image_name']}.png";
+                    $thumb = "{$image['image_name']}-thumb.png";
+                    $src = $onclick = null;
+
+                    if (file_exists("images/thumbs/$thumb")) {
+                        $src = "images/thumbs/$thumb";
+                    }
+                    if (file_exists("images/$filename")) {
+                        $onclick = " onclick=\"expandImage('images/$filename')\"";
+                        $src ??= "images/$filename";
+                    }
+                    if ($src) {
                         echo <<<THUMB
                         <span class="thumbnail">
-                            <img src="gallery/images/thumbs/$filename" alt="{$image['image_description']}">
+                            <img src="$src" alt="{$image['image_description']}"$onclick>
                         </span>
                         THUMB;
                     }
                 }
             ?>
         </div>
+
+        <div id="expanded-image-overlay" onclick="collapseImage()">
+            <img id="expanded-image">
+        </div>
+        <script src="/scripts/overlay.js"></script>
     </body>
 </html>
