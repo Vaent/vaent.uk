@@ -9,46 +9,25 @@
         <script src="/scripts/toggles.js"></script>
     </head>
     <body>
+        <?php
+            $conf = parse_ini_file('../../conf.ini');
+            try {
+                $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
+                $allImages = $pg->query('SELECT * FROM get_recent_and_older_image_details();')->fetch(PDO::FETCH_ASSOC);
+            } catch(Exception $ex) {
+                die('<div>SERVER ERROR: Unable to display images (could not retrieve details from the database)</div>');
+            }
+        ?>
         <div class="image-group">
-            <?php
-                $conf = parse_ini_file('../../conf.ini');
-                try {
-                    $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
-                    $images = $pg->query('SELECT * from get_all_basic_image_details();');
-                } catch(Exception $ex) {
-                    die('SERVER ERROR: Unable to display images (could not retrieve details from the database)');
-                }
-
-                foreach ($images as $image) {
-                    $filename = "{$image['image_name']}.png";
-                    $thumb = "{$image['image_name']}-thumb.png";
-                    $src = $onclick = $isNude = $display = null;
-
-                    if (file_exists("images/thumbs/$thumb")) {
-                        $src = "src=images/thumbs/$thumb";
-                    }
-                    if (file_exists("images/$filename")) {
-                        $onclick = "onclick=\"expandImage('images/$filename')\"";
-                        $src ??= "src=images/$filename";
-                    }
-                    if ($src) {
-                        if ($image["is_nude"]) {
-                            $isNude = "data-is-nude=\"true\"";
-                            $src = "data-$src";
-                            $display = "style=\"display:none\"";
-                        }
-                        echo <<<THUMB
-                        <span class="thumbnail" $display>
-                            <img alt="{$image['image_description']}" $src $onclick $isNude>
-                        </span>
-                        THUMB;
-                    }
-                }
-            ?>
+            <h1>Recent</h1>
+            <?php generateThumbnails(json_decode($allImages['recent'], false)); ?>
+        </div>
+        <div class="image-group">
+            <h1>Older work</h1>
+            <?php generateThumbnails(json_decode($allImages['older'], false)); ?>
         </div>
         <div id="gallery-settings">
             <h1>Gallery settings</h1>
-            <hr>
             <p>Include nudes?
                 <span class="toggle-selector">
                     <span data-toggle-position="0" class="toggle-currently-selected">No</span><!--
@@ -72,3 +51,32 @@
         <script src="/scripts/overlay.js"></script>
     </body>
 </html>
+<?php
+    function generateThumbnails($images) {
+        foreach ($images as $image) {
+            $filename = "{$image->image_name}.png";
+            $thumb = "{$image->image_name}-thumb.png";
+            $src = $onclick = $isNude = $display = null;
+
+            if (file_exists("images/thumbs/$thumb")) {
+                $src = "src=images/thumbs/$thumb";
+            }
+            if (file_exists("images/$filename")) {
+                $onclick = "onclick=\"expandImage('images/$filename')\"";
+                $src ??= "src=images/$filename";
+            }
+            if ($src) {
+                if ($image->is_nude) {
+                    $isNude = "data-is-nude=\"true\"";
+                    $src = "data-$src";
+                    $display = "style=\"display:none\"";
+                }
+                echo <<<THUMB
+                <span class="thumbnail" $display>
+                    <img alt="{$image->image_description}" $src $onclick $isNude>
+                </span>
+                THUMB;
+            }
+        }
+    }
+?>
