@@ -11,3 +11,7 @@ function expandImage(src) {
 function collapseImage() {
     expandedImageOverlay.style.display = "none";
 }
+
+document.addEventListener("keydown", event => {
+    if (event.code == "Escape") collapseImage();
+});
