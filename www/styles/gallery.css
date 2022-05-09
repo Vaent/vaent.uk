@@ -21,7 +21,7 @@ h1 {
 
 span.thumbnail {
     display: inline-flex;
-    background-color: #555555;
+    background-image: linear-gradient(black, rgba(70,130,180,0.3), black);
     border: solid white;
     margin: 30px 20px;
 }
