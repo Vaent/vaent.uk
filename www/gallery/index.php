@@ -72,9 +72,17 @@
                     $src = "data-$src";
                     $display = "style=\"display:none\"";
                 }
+                $nameLabel = str_starts_with($image->image_name, "untitled") ? "" : "<i>{$image->image_name}</i>";
                 echo <<<THUMB
-                <span class="thumbnail" $display>
-                    <img alt="{$image->image_description}" $src $onclick $isNude>
+                <span class="image-box" $isNude $display">
+                    <span class="thumbnail">
+                        <img alt="{$image->image_description}" $src $onclick>
+                    </span>
+                    <span class="image-label">
+                        $nameLabel
+                        <br>
+                        {$image->media}, {$image->yr}
+                    </span>
                 </span>
                 THUMB;
             }

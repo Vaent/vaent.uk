@@ -21,12 +21,12 @@ function toggle(elementClicked) {
 function toggleNudes(elementClicked) {
     if (toggle(elementClicked)) {
         const isSelectedShowNude = elementClicked.parentElement.getElementsByClassName("toggle-slider")[0].dataset.currentlySelected;
-        for (let thumb of document.getElementsByClassName("thumbnail")) {
+        for (let frame of document.getElementsByClassName("image-box")) {
             if (isSelectedShowNude == true) {
-                thumb.firstElementChild.src ||= thumb.firstElementChild.dataset.src;
-                thumb.style.display = "";
-            } else if (thumb.firstElementChild.dataset.isNude) {
-                thumb.style.display = "none";
+                frame.querySelector("img").src ||= frame.querySelector("img").dataset.src;
+                frame.style.display = "";
+            } else if (frame.querySelector("img").dataset.isNude) {
+                frame.style.display = "none";
             }
         }
         window.scrollTo({top: 0, behavior: "smooth"});

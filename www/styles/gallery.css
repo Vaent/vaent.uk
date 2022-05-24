@@ -19,11 +19,18 @@ h1 {
     left: 10px;
 }
 
+span.image-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 200px;
+    border: solid white;
+    margin: 30px 20px;
+}
+
 span.thumbnail {
     display: inline-flex;
     background-image: linear-gradient(black, rgba(70,130,180,0.3), black);
-    border: solid white;
-    margin: 30px 20px;
 }
 
 span.thumbnail img {
@@ -34,6 +41,11 @@ span.thumbnail img {
 
 span.thumbnail img[onclick] {
     cursor: zoom-in;
+}
+
+span.image-label {
+    text-align: center;
+    padding: 15px;
 }
 
 #expanded-image-overlay {
