@@ -54,8 +54,9 @@
 <?php
     function generateThumbnails($images) {
         foreach ($images as $image) {
-            $filename = "{$image->image_name}.png";
-            $thumb = "{$image->image_name}-thumb.png";
+            $filenameStub = imageNameToFilename($image->image_name);
+            $filename = "$filenameStub.png";
+            $thumb = "$filenameStub-thumb.png";
             $src = $onclick = $isNude = $display = null;
 
             if (file_exists("images/thumbs/$thumb")) {
@@ -78,5 +79,11 @@
                 THUMB;
             }
         }
+    }
+
+    function imageNameToFilename($n) {
+        $n = preg_replace("/^[^[:alnum:]]+|[^[:alnum:]]+$/", "", $n); //trim leading/trailing punctuation/ws
+        $n = preg_replace("/([[:alpha:]])'([[:alpha:]])/", "$1$2", $n); //strip contraction apostrophes
+        return preg_replace("/[^[:alnum:]]+/", "-", strtolower($n));
     }
 ?>
