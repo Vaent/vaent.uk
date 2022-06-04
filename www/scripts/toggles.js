@@ -25,7 +25,7 @@ function toggleNudes(elementClicked) {
             if (isSelectedShowNude == true) {
                 frame.querySelector("img").src ||= frame.querySelector("img").dataset.src;
                 frame.style.display = "";
-            } else if (frame.querySelector("img").dataset.isNude) {
+            } else if (frame.dataset.isNude) {
                 frame.style.display = "none";
             }
         }
