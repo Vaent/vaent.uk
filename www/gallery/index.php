@@ -45,7 +45,7 @@
             </p>
         </div>
 
-        <div id="expanded-image-overlay" onclick="collapseImage()">
+        <div id="expanded-image-overlay" onclick="updateHash('')">
             <img id="expanded-image">
         </div>
         <script src="/scripts/overlay.js"></script>
@@ -63,7 +63,7 @@
                 $src = "src=images/thumbs/$thumb";
             }
             if (file_exists("images/$filename")) {
-                $onclick = "onclick=\"expandImage('images/$filename')\"";
+                $onclick = "onclick=\"updateHash('$filename')\"";
                 $src ??= "src=images/$filename";
             }
             if ($src) {
