@@ -16,7 +16,7 @@ function handleUriFragment() {
     if (location.hash) {
         let frag = location.hash.substring(1);
         let img = document.querySelector(`img[onclick="updateHash('${frag}')"]`);
-        if (img) {
+        if (img?.parentNode.parentNode.style.display != "none") {
             expandImage(frag);
         } else {
             location.hash = "";
