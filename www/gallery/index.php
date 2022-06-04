@@ -63,7 +63,7 @@
                 $src = "src=images/thumbs/$thumb";
             }
             if (file_exists("images/$filename")) {
-                $onclick = "onclick=\"updateHash('$filename')\"";
+                $onclick = "onclick=\"updateHash('$filenameStub')\"";
                 $src ??= "src=images/$filename";
             }
             if ($src) {

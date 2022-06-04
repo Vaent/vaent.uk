@@ -4,7 +4,7 @@ const expandedImageOverlay = document.getElementById("expanded-image-overlay");
 const expandedImage = document.getElementById("expanded-image");
 
 function expandImage(src) {
-    expandedImage.src = `images/${src}`;
+    expandedImage.src = `images/${src}.png`;
     expandedImageOverlay.style.display = "block";
 }
 
