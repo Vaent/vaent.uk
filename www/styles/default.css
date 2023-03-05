@@ -26,6 +26,17 @@ a:visited {
     color: MediumOrchid;
 }
 
+span.special {
+    color: SteelBlue;
+    font-weight: bold;
+}
+
+span.vaent-inline {
+    color: SteelBlue;
+    font-family: "Lucida Handwriting", cursive;
+    font-weight: bold;
+}
+
 span.vaent-title {
     color: SteelBlue;
     font-family: "Lucida Handwriting", cursive;
@@ -36,4 +47,34 @@ span.vaent-title {
 .comment {
     font-size: 70%;
     margin: 0;
+}
+
+form {
+    padding: 20px;
+    border: 1px solid LightGrey;
+}
+
+form input[type=email], textarea {
+    font: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 10px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form input[type=submit] {
+    background-color: rgb(50,50,50);
+    color: inherit;
+    font-size: 150%;
+    font-weight: bold;
+    margin: 5px;
+    padding: 15px;
+    border: 5px double LightGrey;
+    border-radius: 15px;
+    cursor: pointer;
 }
