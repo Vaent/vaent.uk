@@ -6,7 +6,7 @@
     $conf = parse_ini_file('../../conf.ini');
     try {
         $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['cdbname']}", $conf['username'], $conf['password']);
-        $stmt = $pg->prepare('CALL record_message(:email, :message)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+        $stmt = $pg->prepare('SELECT record_message(:email, :message)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
         if (! $stmt->execute(['email' => $_POST['email'], 'message' => $_POST['message']]))
             throw new Exception('Unable to execute prepared statement');
     } catch(Exception $ex) {
