@@ -23,6 +23,9 @@
                 <form action="/contact/submit-message.php" method="post">
                     <label for="email">Email address:</label>
                     <input type="email" id="email" name="email" value="">
+                    <input type="checkbox" id="send-copy" name="send-copy">
+                    <label for="send-copy">If you want to receive a copy of your message to the above email address, tick this box.</label>
+                    <hr>
                     <label for="message">Your message:</label>
                     <textarea id="message" name="message" rows="5"></textarea>
                     <input type="submit" value="Click here to send">
