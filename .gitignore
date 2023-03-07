@@ -3,3 +3,4 @@ images/
 cardpeegee/builds/refreshment/*/Build/*
 cardpeegee/builds/refreshment/*/TemplateData/*
 !cardpeegee/builds/refreshment/*/TemplateData/style.css
+PHPMailer/
