@@ -33,3 +33,25 @@
         </main>
     </body>
 </html>
+<?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require '../../PHPMailer/src/Exception.php';
+    require '../../PHPMailer/src/PHPMailer.php';
+    require '../../PHPMailer/src/SMTP.php';
+    try {
+        $notification = new PHPMailer(true);
+        $notification->isSMTP();
+        $notification->Host = "{$conf['mailhost']}";
+        $notification->SMTPAuth = true;
+        $notification->Username = "{$conf['mailuser']}";
+        $notification->Password = "{$conf['mailpass']}";
+        $notification->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $notification->Port = $conf['mailport'];
+        $notification->setFrom("{$conf['mailuser']}");
+        $notification->addAddress("{$conf['mailuser']}");
+        $notification->Subject = 'New message received!';
+        $notification->AllowEmpty = true;
+        $notification->send();
+    } catch(Exception $ex) {}
+?>
