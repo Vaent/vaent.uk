@@ -5,9 +5,14 @@
     }
     $conf = parse_ini_file('../../conf.ini');
     try {
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        if ($email === false) {
+            header('Location: .?failed-submission=true');
+            exit;
+        }
         $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['cdbname']}", $conf['username'], $conf['password']);
         $stmt = $pg->prepare('SELECT record_message(:email, :message)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-        if (! $stmt->execute(['email' => $_POST['email'], 'message' => $_POST['message']]))
+        if (! $stmt->execute(['email' => $email, 'message' => $_POST['message']]))
             throw new Exception('Unable to execute prepared statement');
     } catch(Exception $ex) {
         die('<div>SERVER ERROR: Unable to store your message. Please check the details you entered and try again later.</div>');
@@ -24,7 +29,7 @@
         <main>
             <div>
                 <p>Your message was submitted with the details below.</p>
-                <p><span class="special">Email address:</span> <?= htmlspecialchars($_POST['email']) ?></p>
+                <p><span class="special">Email address:</span> <?= htmlspecialchars($email) ?></p>
                 <p><span class="special">Message:</span> <?= htmlspecialchars($_POST['message']) ?></p>
             </div>
             <div>

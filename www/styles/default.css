@@ -18,6 +18,11 @@ main div {
     margin-top: 50px;
 }
 
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
 a {
     color: HotPink;
     font-weight: bold;

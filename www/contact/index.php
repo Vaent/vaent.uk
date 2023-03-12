@@ -12,6 +12,9 @@
         </header>
         <main>
             <div>
+<?php if (isset($_GET['failed-submission']) && $_GET['failed-submission'] === 'true'): ?>
+                <p class="warning">The email address you entered was invalid.</p>
+<?php endif ?>
                 <p>Commission artwork, send feedback about the website, tell me if something on
                     <a href="/"><span class="vaent-inline">Vaent</span> .uk</a>
                     isn't working, or just say hi - you can use this form to contact Vaent about whatever.</p>
