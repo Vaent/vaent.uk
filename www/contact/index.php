@@ -21,6 +21,9 @@
                 <p>The email address and message will be stored securely, and will not be shared with anyone unless UK law
                     requires me to. I'll only write to the email address if you ask me to, or if I need to because of a
                     query or comment you raise.</p>
+                <p>The network address from which your message was submitted will also be stored securely,
+                    to assist with spam prevention. Please don't submit multiple messages
+                    or you may be blocked from using the form.</p>
             </div>
             <div>
                 <form action="/contact/submit-message.php" method="post">

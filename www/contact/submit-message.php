@@ -11,11 +11,14 @@
             exit;
         }
         $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['cdbname']}", $conf['username'], $conf['password']);
-        $stmt = $pg->prepare('SELECT record_message(:email, :message)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-        if (! $stmt->execute(['email' => $email, 'message' => $_POST['message']]))
-            throw new Exception('Unable to execute prepared statement');
+        $stmt = $pg->prepare('SELECT record_message(:email, :message, :source)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+        $stmt->execute(['email' => $email, 'message' => $_POST['message'], 'source' => $_SERVER['REMOTE_ADDR']]);
+        if (!$stmt) throw new Exception('Unable to execute prepared statement');
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = json_decode($result['record_message'],true);
+        if ($result['status'] === 0) die("Your message wasn't stored: {$result['detail']}");
     } catch(Exception $ex) {
-        die('<div>SERVER ERROR: Unable to store your message. Please check the details you entered and try again later.</div>');
+        die("<div>SERVER ERROR: Unable to store your message. Please check the details you entered and try again later.</div>");
     }
 ?>
 <!DOCTYPE html>
