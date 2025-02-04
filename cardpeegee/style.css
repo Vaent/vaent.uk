@@ -1,11 +1,15 @@
-header{
+body {
+    font-family: sans-serif;
+}
+
+header {
     position: absolute;
     top: 20px;
     left: 20px;
     width: 950px;
 }
 
-nav{
+nav {
     position: absolute;
     top: 300px;
     left: 20px;
@@ -16,19 +20,54 @@ nav{
     font-size: 1.4em;
 }
 
-main{
+main {
     position: absolute;
     top: 210px;
     left: 270px;
     width: 700px;
 }
 
-#content p{
+#content p {
     clear: both;
-    font: 1.2em sans-serif;
+    font-size: 1.2em;
+
+    &.errorMessage {
+        font-size: unset;
+        font-style: italic;
+        color: darkRed;
+    }
 }
 
-.icon{
+.icon {
     float: left;
     margin: 32px;
+}
+
+details {
+    border-block: 3px double black;
+    padding-block: 10px;
+    margin-block: 10px;
+
+    summary {
+        color: dimGrey;
+    }
+
+    summary + * {
+        padding-left: 2em;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    margin: 15px 0 5px;
+
+    th, td {
+        border: 1px solid black;
+        padding: 5px 8px;
+        text-align: center;
+    }
+
+    td:nth-child(2) {
+        text-align: left;
+    }
 }
