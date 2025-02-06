@@ -1,3 +1,16 @@
+ <?php
+    $conf = parse_ini_file('../cardpeegee-conf.ini');
+    try {
+        $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
+        $allVersionDetails = $pg->query("SELECT * from {$conf['get-version-details-fn']}();")->fetchAll();
+        $versionDataLoaded = true;
+        $latestVersion = $allVersionDetails[0]['version_number'];
+    } catch(Exception $ex) {
+        error_log($ex);
+        $versionDataLoaded = false;
+        $latestVersion = $conf['latest-version-fallback'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -9,21 +22,11 @@
         <div id="content">
             <p>Work continues on the CardPeeGee "Vanilla refreshment" intended to replace the CardPeeGee Vanilla browser game from 2015.
             An early prototype has been built with very limited functionality, to demonstrate progress on the refresh project.</p>
-            <p><a href="/builds/refreshment/0.0.3/index.html">Click here to play Vanilla refreshment v0.0.3</a>.</p>
+            <p><a href="/builds/refreshment/<?= $latestVersion ?>/index.html">Click here to play Vanilla refreshment v<?= $latestVersion ?></a>.</p>
             <p>You can select earlier versions from the table below.</p>
             <details>
                 <summary>CardPeeGee refreshed versions (click to expand/collapse)</summary>
-                <?php
-                    $conf = parse_ini_file('../cardpeegee-conf.ini');
-                    try {
-                        $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
-                        $allVersionDetails = $pg->query("SELECT * FROM ${conf['tblname']} ORDER BY version_number DESC;");
-                        $versionDataLoaded = true;
-                    } catch(Exception $ex) {
-                        $versionDataLoaded = false;
-                    }
-                    if ($versionDataLoaded === true):
-                ?>
+                <?php if ($versionDataLoaded === true): ?>
                 <table>
                     <thead>
                         <th>Version</th>
@@ -48,10 +51,10 @@
 </html>
 <?php
     function toTableRows($versionDetails) {
-        foreach ($versionDetails as $version) {
-            $versionHref = "/builds/refreshment/{$version[0]}/index.html";
-            $nonBreakingDate = str_replace("-", "&#8209;", $version[2]);
-            echo "<tr><td><a href=\"$versionHref\">{$version[0]}</td><td>{$version[1]}</td><td>$nonBreakingDate</td></tr>";
+        foreach ($versionDetails as $v) {
+            $versionHref = "/builds/refreshment/{$v['version_number']}/index.html";
+            $nonBreakingDate = str_replace("-", "&#8209;", $v['release_date']);
+            echo "<tr><td><a href=\"$versionHref\">{$v['version_number']}</td><td>{$v['version_description']}</td><td>$nonBreakingDate</td></tr>";
         }
     }
 ?>
