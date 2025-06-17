@@ -54,7 +54,13 @@
         foreach ($versionDetails as $v) {
             $versionHref = "/builds/refreshment/{$v['version_number']}/index.html";
             $nonBreakingDate = str_replace("-", "&#8209;", $v['release_date']);
-            echo "<tr><td><a href=\"$versionHref\">{$v['version_number']}</td><td>{$v['version_description']}</td><td>$nonBreakingDate</td></tr>";
+            echo <<<HTML
+                <tr>
+                    <td><a href="$versionHref" aria-details="desc-{$v['version_number']} date-{$v['version_number']}">{$v['version_number']}</td>
+                    <td id="desc-{$v['version_number']}">{$v['version_description']}</td>
+                    <td id="date-{$v['version_number']}">$nonBreakingDate</td>
+                </tr>
+                HTML;
         }
     }
 ?>
