@@ -21,7 +21,7 @@
     <body>
         <div id="content">
             <p>Work continues on the CardPeeGee "Vanilla refreshment" intended to replace the CardPeeGee Vanilla browser game from 2015.
-            An early prototype has been built with very limited functionality, to demonstrate progress on the refresh project.</p>
+            Early prototypes are being built and published to demonstrate progress on the refresh project.</p>
             <p><a href="/builds/refreshment/<?= $latestVersion ?>/index.html">Click here to play Vanilla refreshment v<?= $latestVersion ?></a>.</p>
             <p>You can select earlier versions from the table below.</p>
             <details>
