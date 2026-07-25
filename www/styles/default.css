@@ -11,6 +11,11 @@ header span {
     display: inline-block;
     margin: 20px;
 }
+header h1 {
+    font-size: 100%;
+    display: inline;
+    font-weight: normal;
+}
 
 main div {
     max-width: 55em;
