@@ -18,6 +18,10 @@
                 die('<div>SERVER ERROR: Unable to display images (could not retrieve details from the database)</div>');
             }
         ?>
+        <noscript><div class="warning">
+            Your browser is preventing scripts from running in this page.
+            It will not work correctly unless you enable Javascript.
+        </div></noscript>
         <div class="image-group">
             <h1>Recent</h1>
             <?php generateThumbnails(json_decode($allImages['recent'], false)); ?>
