@@ -10,10 +10,10 @@
     </head>
     <body>
         <?php
-            $conf = parse_ini_file('../../conf.ini');
+            $conf = parse_ini_file('../../gallery-conf.ini');
             try {
                 $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
-                $allImages = $pg->query('SELECT * FROM get_recent_and_older_image_details();')->fetch(PDO::FETCH_ASSOC);
+                $allImages = $pg->query("SELECT * FROM {$conf['get_image_details_function']}();")->fetch(PDO::FETCH_ASSOC);
             } catch(Exception $ex) {
                 die('<div>SERVER ERROR: Unable to display images (could not retrieve details from the database)</div>');
             }
@@ -24,11 +24,11 @@
         </div></noscript>
         <div class="image-group">
             <h1>Recent</h1>
-            <?php generateThumbnails(json_decode($allImages['recent'], false)); ?>
+            <?php if (!is_null($allImages['recent'])) generateThumbnails(json_decode($allImages['recent'], false)); ?>
         </div>
         <div class="image-group">
             <h1>Older work</h1>
-            <?php generateThumbnails(json_decode($allImages['older'], false)); ?>
+            <?php if (!is_null($allImages['older'])) generateThumbnails(json_decode($allImages['older'], false)); ?>
         </div>
         <div id="gallery-settings">
             <h1>Gallery settings</h1>
@@ -64,11 +64,11 @@
             $src = $onclick = $isNude = $display = null;
 
             if (file_exists("images/thumbs/$thumb")) {
-                $src = "src=images/thumbs/$thumb";
+                $src = "src=/gallery/images/thumbs/$thumb";
             }
             if (file_exists("images/$filename")) {
                 $onclick = "onclick=\"updateHash('$filenameStub')\"";
-                $src ??= "src=images/$filename";
+                $src ??= "src=/gallery/images/$filename";
             }
             if ($src) {
                 if ($image->is_nude) {

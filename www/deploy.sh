@@ -102,6 +102,7 @@ do
     for vf in "${!versions[@]}"; do echo "$vf: ${versions[$vf]}"; done
     exit 1
   fi
+
   name=${BASH_REMATCH[1]}
   ext=${BASH_REMATCH[2]}
   oldfile="$name.v$oldver.$ext"
@@ -109,24 +110,25 @@ do
   then
     # File unchanged - delete unversioned copy, keep old version.
     rm ../www-deploy/"$vf"
+    newfile="$oldfile"
   else
     newver=$(($oldver+1))
     newfile="$name.v$newver.$ext"
-
-    # Update content of any files which reference this file.
-    # Only CSS and JS should be versioned; only PHP and HTML should contain references.
-    for filetoscan in $(find ../www-deploy -iname "*.php" -o -iname "*.html")
-    do
-      # Replace any unversioned references to this file with the updated version.
-      sed -i "s~$vf~$newfile~w tmp_sed" "$filetoscan"
-      if [[ -s tmp_sed ]]; then echo "Replaced $vf with $newfile in $filetoscan"; fi
-      rm tmp_sed
-    done
-
     echo "Writing $newfile to replace $oldfile"
     mv ../www-deploy/"$vf" ../www-deploy/"$newfile"
     rm ../www-deploy/"$oldfile"
   fi
+
+  # Update content of any files which reference this file.
+  # Only CSS and JS should be versioned; only PHP and HTML should contain references.
+  # Any existing references were de-versioned before comparing with source, and must be restored even if unchanged.
+  for filetoscan in $(find ../www-deploy -iname "*.php" -o -iname "*.html")
+  do
+    # Replace any unversioned references to this file with the updated version.
+    sed -i "s~$vf~$newfile~w tmp_sed" "$filetoscan"
+    if [[ -s tmp_sed ]]; then echo "Replaced $vf with $newfile in $filetoscan"; fi
+    rm tmp_sed
+  done
 done
 
 echo "Deployment script completed successfully."

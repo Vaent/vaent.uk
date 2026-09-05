@@ -1,0 +1,47 @@
+span.toggle-selector {
+    /* background-color: #DDDDDD; */
+    padding: 0.5em 0;
+    margin: 0.1em 1em;
+}
+
+span.toggle-slider {
+    position: relative;
+    display: inline-block;
+    height: 1.2em;
+    width: 2em;
+    bottom: -0.3em;
+    border: 2px solid #CCCCCC;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+span.toggle-slider::before {
+    position: absolute;
+    background-color: SteelBlue;
+    content: "";
+    height: 1em;
+    width: 1em;
+    bottom: 0.1em;
+    border-radius: 5px;
+    transition: left 0.3s;
+}
+
+span.toggle-slider[data-currently-selected="0"]::before {
+    left: 0.1em;
+}
+
+span.toggle-slider[data-currently-selected="1"]::before {
+    left: 0.9em;
+}
+
+.toggle-currently-selected {
+    color: SteelBlue;
+    font-weight: bold;
+    padding: 0.3em;
+    cursor: default;
+}
+
+.toggle-not-selected {
+    padding: 0.3em;
+    cursor: pointer;
+}

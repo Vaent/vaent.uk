@@ -3,15 +3,15 @@
         header('Location: .');
         exit;
     }
-    $conf = parse_ini_file('../../conf.ini');
+    $conf = parse_ini_file('../../contact-conf.ini');
     try {
         $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
         if ($email === false) {
             header('Location: .?failed-submission=true');
             exit;
         }
-        $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['cdbname']}", $conf['username'], $conf['password']);
-        $stmt = $pg->prepare('SELECT record_message(:email, :message, :source)', [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+        $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
+        $stmt = $pg->prepare("SELECT {$conf['record_message_function']}(:email, :message, :source)", [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
         $stmt->execute(['email' => $email, 'message' => $_POST['message'], 'source' => $_SERVER['REMOTE_ADDR']]);
         if (!$stmt) throw new Exception('Unable to execute prepared statement');
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -50,14 +50,14 @@
     try {
         $notification = new PHPMailer(true);
         $notification->isSMTP();
-        $notification->Host = "{$conf['mailhost']}";
+        $notification->Host = "{$conf['eml_host']}";
         $notification->SMTPAuth = true;
-        $notification->Username = "{$conf['mailuser']}";
-        $notification->Password = "{$conf['mailpass']}";
+        $notification->Username = "{$conf['eml_user']}";
+        $notification->Password = "{$conf['eml_pass']}";
         $notification->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $notification->Port = $conf['mailport'];
-        $notification->setFrom("{$conf['mailuser']}");
-        $notification->addAddress("{$conf['mailuser']}");
+        $notification->Port = $conf['eml_port'];
+        $notification->setFrom("{$conf['eml_user']}");
+        $notification->addAddress("{$conf['eml_user']}");
         $notification->Subject = 'New message received!';
         $notification->AllowEmpty = true;
         $notification->send();
