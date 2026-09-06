@@ -27,7 +27,10 @@ header nav li {
     padding-inline: 1.5rem;
     margin-inline: 0;
 }
-header nav a:not([href]) {
+header nav li.current-page {
+    border-block: 1px solid LightGrey;
+}
+header nav li.current-page a {
     color: LightGrey;
     text-decoration: none;
 }

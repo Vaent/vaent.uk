@@ -14,7 +14,7 @@
             <?php
                 array_walk($pages, function ($link_attributes, $page_name) {
                     echo ($GLOBALS['this_page'] == $page_name
-                        ? "<li><a>$page_name</a></li>"
+                        ? "<li class=\"current-page\"><a>$page_name</a></li>"
                         : "<li><a $link_attributes>$page_name</a></li>");
                 })
             ?>
