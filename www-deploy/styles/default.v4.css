@@ -5,6 +5,7 @@ body {
 }
 
 header {
+    border-bottom: 1px solid LightGrey;
     font-size: 3em;
 }
 header span {
@@ -15,6 +16,23 @@ header h1 {
     font-size: 100%;
     display: inline;
     font-weight: normal;
+}
+
+header nav {
+    font-size: 1.2rem;
+    line-height: 2.5rem;
+}
+header nav li {
+    display: inline-flex;
+    padding-inline: 1.5rem;
+    margin-inline: 0;
+}
+header nav li.current-page {
+    border-block: 1px solid LightGrey;
+}
+header nav li.current-page a {
+    color: LightGrey;
+    text-decoration: none;
 }
 
 main div {
