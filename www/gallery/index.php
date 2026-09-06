@@ -10,48 +10,54 @@
     </head>
     <body>
         <?php
-            $conf = parse_ini_file('../../gallery-conf.ini');
-            try {
-                $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
-                $allImages = $pg->query("SELECT * FROM {$conf['get_image_details_function']}();")->fetch(PDO::FETCH_ASSOC);
-            } catch(Exception $ex) {
-                die('<div>SERVER ERROR: Unable to display images (could not retrieve details from the database)</div>');
-            }
+            $this_page = "Gallery";
+            require('../../header.php');
         ?>
-        <noscript><div class="warning">
-            Your browser is preventing scripts from running in this page.
-            It will not work correctly unless you enable Javascript.
-        </div></noscript>
-        <div class="image-group">
-            <h1>Recent</h1>
-            <?php if (!is_null($allImages['recent'])) generateThumbnails(json_decode($allImages['recent'], false)); ?>
-        </div>
-        <div class="image-group">
-            <h1>Older work</h1>
-            <?php if (!is_null($allImages['older'])) generateThumbnails(json_decode($allImages['older'], false)); ?>
-        </div>
-        <div id="gallery-settings">
-            <h1>Gallery settings</h1>
-            <p>Include nudes?
-                <span class="toggle-selector">
-                    <span data-toggle-position="0" class="toggle-currently-selected">No</span><!--
-                 --><span class="toggle-slider" data-currently-selected="0" onclick="toggleNudes(this)"></span><!--
-                 --><span data-toggle-position="1" class="toggle-not-selected" onclick="toggleNudes(this)">Yes</span>
-                </span>
-            </p>
-            <p style="font-style:italic">
-                By default, images which prominently feature human nudity are not displayed or downloaded to your machine;
-                so anyone who doesn't want to see that content, doesn't have to.
-            </p>
-            <p style="font-style:italic">
-                That said, the nude art in this collection is no more "scandalous" than what you might see in a public gallery/museum.
-                If you're comfortable with that, you can use the toggle to update the page with those images.
-            </p>
-        </div>
+        <main>
+            <?php
+                $conf = parse_ini_file('../../gallery-conf.ini');
+                try {
+                    $pg = new PDO("pgsql:host={$conf['host']};port={$conf['port']};dbname={$conf['dbname']}", $conf['username'], $conf['password']);
+                    $allImages = $pg->query("SELECT * FROM {$conf['get_image_details_function']}();")->fetch(PDO::FETCH_ASSOC);
+                } catch(Exception $ex) {
+                    die('<div>SERVER ERROR: Unable to display images (could not retrieve details from the database)</div>');
+                }
+            ?>
+            <noscript><div class="warning">
+                Your browser is preventing scripts from running in this page.
+                It will not work correctly unless you enable Javascript.
+            </div></noscript>
+            <div class="image-group">
+                <h2>Recent</h2>
+                <?php if (!is_null($allImages['recent'])) generateThumbnails(json_decode($allImages['recent'], false)); ?>
+            </div>
+            <div class="image-group">
+                <h2>Older work</h2>
+                <?php if (!is_null($allImages['older'])) generateThumbnails(json_decode($allImages['older'], false)); ?>
+            </div>
+            <div id="gallery-settings">
+                <h2>Gallery settings</h2>
+                <p>Include nudes?
+                    <span class="toggle-selector">
+                        <span data-toggle-position="0" class="toggle-currently-selected">No</span><!--
+                    --><span class="toggle-slider" data-currently-selected="0" onclick="toggleNudes(this)"></span><!--
+                    --><span data-toggle-position="1" class="toggle-not-selected" onclick="toggleNudes(this)">Yes</span>
+                    </span>
+                </p>
+                <p style="font-style:italic">
+                    By default, images which prominently feature human nudity are not displayed or downloaded to your machine;
+                    so anyone who doesn't want to see that content, doesn't have to.
+                </p>
+                <p style="font-style:italic">
+                    That said, the nude art in this collection is no more "scandalous" than what you might see in a public gallery/museum.
+                    If you're comfortable with that, you can use the toggle to update the page with those images.
+                </p>
+            </div>
 
-        <div id="expanded-image-overlay" onclick="updateHash('')">
-            <img id="expanded-image">
-        </div>
+            <div id="expanded-image-overlay" onclick="updateHash('')">
+                <img id="expanded-image">
+            </div>
+        </main>
         <script src="/scripts/overlay.js"></script>
     </body>
 </html>

@@ -1,17 +1,21 @@
-div {
+main {
+    padding-top: 30px;
+}
+
+main div {
     position: relative;
     padding: 20px;
     border: 1px solid #666666;
     margin: 30px;
 }
 
-div.image-group {
+main div.image-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-h1 {
+main h2 {
     position: absolute;
     background-color: black;
     padding: 0 15px;
