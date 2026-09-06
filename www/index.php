@@ -6,24 +6,10 @@
         <link rel="stylesheet" href="styles/default.css">
     </head>
     <body>
-        <header>
-            <h1><span class="vaent-title">Vaent</span>.uk</h1>
-            <nav>
-                <ul>
-                    <li>
-                        <a>Home</a>
-                    </li><li>
-                        <a href="/gallery">Gallery</a>
-                    </li><li>
-                        <a href="https://cardpeegee.vaent.uk" target="_blank">CardPeeGee</a>
-                    </li><li>
-                        <a href="/Snaky/play" target="_blank">Snaky</a>
-                    </li><li>
-                        <a href="/contact">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+        <?php
+            $this_page = "Home";
+            require('../header.php');
+        ?>
         <main>
             <div>
                 <h2>What is this?</h2>
