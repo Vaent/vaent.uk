@@ -8,7 +8,7 @@
     <body>
         <?php
             $this_page = "Games";
-            require('../lib/header.php');
+            require('../../lib/header.php');
         ?>
         <main>
             <div>

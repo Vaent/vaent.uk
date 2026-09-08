@@ -2,7 +2,7 @@
     $pages = [
         'Home' => 'href="/"',
         'Gallery' => 'href="/gallery"',
-        'Games' => 'href="/games.php"',
+        'Games' => 'href="/games"',
         'Contact' => 'href="/contact"',
     ]
 ?>
