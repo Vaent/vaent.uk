@@ -3,15 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Gallery</title>
-        <link rel="stylesheet" href="/styles/default.v4.css">
+        <link rel="stylesheet" href="/styles/default.v5.css">
         <link rel="stylesheet" href="/styles/components.v1.css">
-        <link rel="stylesheet" href="/styles/gallery.v3.css">
+        <link rel="stylesheet" href="/styles/gallery.v4.css">
         <script src="/scripts/toggles.v2.js"></script>
     </head>
     <body>
         <?php
             $this_page = "Gallery";
-            require('../../header.php');
+            require('../../lib/header.php');
         ?>
         <main>
             <?php

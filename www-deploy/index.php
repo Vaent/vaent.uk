@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>Vaent.uk</title>
-        <link rel="stylesheet" href="styles/default.v4.css">
+        <link rel="stylesheet" href="styles/default.v5.css">
     </head>
     <body>
         <?php
             $this_page = "Home";
-            require('../header.php');
+            require('../lib/header.php');
         ?>
         <main>
             <div>
