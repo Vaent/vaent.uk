@@ -8,7 +8,7 @@
     ]
 ?>
 <header>
-    <h1><span class="vaent-title">Vaent</span>.uk</h1>
+    <h1><span class=<?= ($GLOBALS['this_page'] == "Home") ? "vaent-title" : "vaent-inline" ?>>Vaent</span>.uk</h1>
     <nav>
         <ul>
             <?php
