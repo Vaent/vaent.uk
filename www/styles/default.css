@@ -1,11 +1,37 @@
+@property --panelColour {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: Black;
+}
+@property --panelContrastColour {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #333;
+}
+@property --detailColour {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: LightGrey;
+}
+@property --midtoneColour {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #666;
+}
+@property --vaentColour {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: SteelBlue;
+}
+
 body {
-    background-color: black;
-    color: LightGrey;
+    background-color: var(--panelColour);
+    color: var(--detailColour);
     font-family: sans-serif;
 }
 
 header {
-    border-bottom: 1px solid LightGrey;
+    border-bottom: 1px solid var(--detailColour);
     font-size: 3em;
 }
 header span {
@@ -28,17 +54,16 @@ header nav li {
     margin-inline: 0;
 }
 header nav li.current-page {
-    border-block: 1px solid LightGrey;
+    border-block: 1px solid var(--detailColour);
 }
 header nav li.current-page a {
-    color: LightGrey;
+    color: var(--detailColour);
     text-decoration: none;
 }
 
 main div {
     max-width: 55em;
-    margin: 30px;
-    margin-top: 50px;
+    margin: 50px 30px 30px;
 }
 
 .warning {
@@ -54,22 +79,15 @@ a:visited {
     color: MediumOrchid;
 }
 
-span.special {
-    color: SteelBlue;
+span.special, span.vaent-inline, span.vaent-title {
+    color: var(--vaentColour);
     font-weight: bold;
 }
-
-span.vaent-inline {
-    color: SteelBlue;
+span.vaent-inline, span.vaent-title {
     font-family: "Lucida Handwriting", cursive;
-    font-weight: bold;
 }
-
 span.vaent-title {
-    color: SteelBlue;
-    font-family: "Lucida Handwriting", cursive;
     font-size: 200%;
-    font-weight: bold;
 }
 
 .comment {
@@ -79,7 +97,7 @@ span.vaent-title {
 
 form {
     padding: 20px;
-    border: 1px solid LightGrey;
+    border: 1px solid var(--detailColour);
 }
 
 form input[type=email], textarea {
@@ -96,13 +114,13 @@ form textarea {
 }
 
 form input[type=submit] {
-    background-color: rgb(50,50,50);
+    background-color: var(--panelContrastColour);
     color: inherit;
     font-size: 150%;
     font-weight: bold;
     margin: 5px;
     padding: 15px;
-    border: 5px double LightGrey;
+    border: 5px double var(--detailColour);
     border-radius: 15px;
     cursor: pointer;
 }
