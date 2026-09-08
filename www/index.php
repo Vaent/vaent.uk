@@ -8,7 +8,7 @@
     <body>
         <?php
             $this_page = "Home";
-            require('../header.php');
+            require('../lib/header.php');
         ?>
         <main>
             <div>

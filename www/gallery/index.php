@@ -11,7 +11,7 @@
     <body>
         <?php
             $this_page = "Gallery";
-            require('../../header.php');
+            require('../../lib/header.php');
         ?>
         <main>
             <?php
