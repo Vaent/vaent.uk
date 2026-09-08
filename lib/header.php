@@ -2,8 +2,7 @@
     $pages = [
         'Home' => 'href="/"',
         'Gallery' => 'href="/gallery"',
-        'CardPeeGee' => 'href="https://cardpeegee.vaent.uk" target="_blank"',
-        'Snaky' => 'href="/Snaky/play" target="_blank"',
+        'Games' => 'href="/games.php"',
         'Contact' => 'href="/contact"',
     ]
 ?>
