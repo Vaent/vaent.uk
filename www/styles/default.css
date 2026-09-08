@@ -65,6 +65,9 @@ main div {
     max-width: 55em;
     margin: 50px 30px 30px;
 }
+main p {
+    line-height: 1.5rem;
+}
 
 .warning {
     color: red;
