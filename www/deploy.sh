@@ -73,6 +73,9 @@ do
   fi
 done
 
+echo "---"
+declare -A updated_files
+
 # Check every directory and file in source.
 # TODO: skip contents of new directories
 for s in $(find . -type d,f -printf "%P\n")
@@ -85,11 +88,13 @@ do
   then
     echo "Updating $s from source"
     cp -r "$s" ../www-deploy/"$s"
+    updated_files["../www-deploy/$s"]=""
   fi
 done
 
 # TODO: handle new CSS/JS files (which need to be made .v1)
 
+echo "---"
 rgx_unver="^(.+)\.([^.]+)$"
 for vf in "${!versions[@]}"
 do
@@ -111,12 +116,16 @@ do
     # File unchanged - delete unversioned copy, keep old version.
     rm ../www-deploy/"$vf"
     newfile="$oldfile"
+    is_new_version=false
   else
     newver=$(($oldver+1))
     newfile="$name.v$newver.$ext"
     echo "Writing $newfile to replace $oldfile"
     mv ../www-deploy/"$vf" ../www-deploy/"$newfile"
     rm ../www-deploy/"$oldfile"
+    unset 'updated_files[../www-deploy/$vf]'
+    updated_files["../www-deploy/$newfile"]=" (replaced ../www-deploy/$oldfile)"
+    is_new_version=true
   fi
 
   # Update content of any files which reference this file.
@@ -124,11 +133,17 @@ do
   # Any existing references were de-versioned before comparing with source, and must be restored even if unchanged.
   for filetoscan in $(find ../www-deploy -iname "*.php" -o -iname "*.html")
   do
-    # Replace any unversioned references to this file with the updated version.
+    # Replace any unversioned references to this file with the versioned filename.
     sed -i "s~$vf~$newfile~w tmp_sed" "$filetoscan"
     if [[ -s tmp_sed ]]; then echo "Replaced $vf with $newfile in $filetoscan"; fi
     rm tmp_sed
+    if $is_new_version; then updated_files["$filetoscan"]=""; fi
   done
 done
 
+echo "---"
+echo "The following files have changed:"
+for uf in "${!updated_files[@]}"; do echo "$uf${updated_files[$uf]}"; done
+
+echo "---"
 echo "Deployment script completed successfully."
