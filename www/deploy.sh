@@ -80,8 +80,8 @@ declare -A updated_files
 # TODO: skip contents of new directories
 for s in $(find . -type d,f -printf "%P\n")
 do
-  # Skip named files which are not part of the website.
-  if [[ "$s" = deploy.sh ]]; then continue; fi
+  # Skip files/directories which are not part of the website (or are managed separately).
+  case "$s" in (deploy.sh|gallery/images*) continue;; esac
 
   # Copy the file/directory if it doesn't exist in deployment or if the file contents differ.
   if [[ ! -d ../www-deploy/"$s" && ! -f ../www-deploy/"$s" ]] || ([[ -f "$s" ]] && ! cmp -s "$s" ../www-deploy/"$s")

@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
     <head>
       <meta charset="utf-8">
-        <title>Vaent.uk - Games</title>
+        <title>Games - Vaent.uk</title>
+        <link rel="icon" href="/favicon.png">
         <link rel="stylesheet" href="/styles/default.css">
     </head>
     <body>

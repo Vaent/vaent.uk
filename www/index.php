@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Vaent.uk</title>
+        <link rel="icon" href="/favicon.png">
         <link rel="stylesheet" href="styles/default.css">
     </head>
     <body>

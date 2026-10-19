@@ -26,6 +26,7 @@
     <head>
         <meta charset="utf-8">
         <title>Message submitted</title>
+        <link rel="icon" href="/favicon.png">
         <link rel="stylesheet" href="/styles/default.css">
     </head>
     <body>

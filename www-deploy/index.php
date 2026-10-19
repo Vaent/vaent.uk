@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Vaent.uk</title>
-        <link rel="stylesheet" href="styles/default.v5.css">
+        <link rel="icon" href="/favicon.png">
+        <link rel="stylesheet" href="styles/default.v6.css">
     </head>
     <body>
         <?php

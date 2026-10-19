@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
     <head>
       <meta charset="utf-8">
-        <title>Contact Vaent</title>
-        <link rel="stylesheet" href="/styles/default.v5.css">
+        <title>Contact form - Vaent.uk</title>
+        <link rel="icon" href="/favicon.png">
+        <link rel="stylesheet" href="/styles/default.v6.css">
     </head>
     <body>
         <?php

@@ -34,14 +34,19 @@ header {
     border-bottom: 1px solid var(--detailColour);
     font-size: 3em;
 }
-header span {
-    display: inline-block;
-    margin: 20px;
-}
 header h1 {
+    margin: 30px;
     font-size: 100%;
-    display: inline;
     font-weight: normal;
+}
+header h1.title-large {
+    margin-block: 50px;
+}
+header h1.title-large img {
+    height: 1.7em;
+}
+header h1.title-normal img {
+    height: 1.1em;
 }
 
 header nav {
@@ -82,15 +87,12 @@ a:visited {
     color: MediumOrchid;
 }
 
-span.special, span.vaent-inline, span.vaent-title {
+span.special, span.vaent-inline {
     color: var(--vaentColour);
     font-weight: bold;
 }
-span.vaent-inline, span.vaent-title {
+span.vaent-inline {
     font-family: "Lucida Handwriting", cursive;
-}
-span.vaent-title {
-    font-size: 200%;
 }
 
 .comment {

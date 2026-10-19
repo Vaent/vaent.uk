@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Gallery</title>
-        <link rel="stylesheet" href="/styles/default.v5.css">
+        <title>Art gallery - Vaent.uk</title>
+        <link rel="icon" href="/favicon.png">
+        <link rel="stylesheet" href="/styles/default.v6.css">
         <link rel="stylesheet" href="/styles/components.v1.css">
         <link rel="stylesheet" href="/styles/gallery.v4.css">
         <script src="/scripts/toggles.v2.js"></script>
