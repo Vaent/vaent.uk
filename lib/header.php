@@ -7,7 +7,7 @@
     ]
 ?>
 <header>
-    <h1 class=<?= ($GLOBALS['this_page'] == "Home") ? "title-large" : "title-normal" ?>><img src="/Vaent_sig.png" />.uk</h1>
+    <h1 class=<?= ($GLOBALS['this_page'] == "Home") ? "title-large" : "title-normal" ?>><img src="/Vaent_sig.png" alt="Vaent" />.uk</h1>
     <nav>
         <ul>
             <?php
