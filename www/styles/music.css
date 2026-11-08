@@ -1,0 +1,45 @@
+main div {
+    position: relative;
+    margin: 30px;
+}
+
+main div.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid var(--midtoneColour);
+}
+
+span.content-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: solid var(--detailColour);
+    margin: 30px 20px;
+    width: 350px;
+}
+
+span.content-card > * {
+    position: relative;
+    top: -25px;
+}
+
+span.content-card > a {
+    margin: 5px;
+}
+
+.video-embed {
+    display: inline-flex;
+}
+
+.video-embed iframe {
+    border: none;
+}
+
+.video-title {
+    font-size: 1em;
+    font-weight: normal;
+    background-color: var(--panelColour);
+    padding: 0 15px;
+}
