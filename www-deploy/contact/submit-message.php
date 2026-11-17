@@ -43,24 +43,12 @@
     </body>
 </html>
 <?php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    require '../../PHPMailer/src/Exception.php';
-    require '../../PHPMailer/src/PHPMailer.php';
-    require '../../PHPMailer/src/SMTP.php';
     try {
-        $notification = new PHPMailer(true);
-        $notification->isSMTP();
-        $notification->Host = "{$conf['eml_host']}";
-        $notification->SMTPAuth = true;
-        $notification->Username = "{$conf['eml_user']}";
-        $notification->Password = "{$conf['eml_pass']}";
-        $notification->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $notification->Port = $conf['eml_port'];
-        $notification->setFrom("{$conf['eml_user']}");
-        $notification->addAddress("{$conf['eml_user']}");
-        $notification->Subject = 'New message received!';
-        $notification->AllowEmpty = true;
-        $notification->send();
-    } catch(Exception $ex) {}
+        mail(
+            $conf['eml_user'],
+            'New message received!',
+            '',
+            array('From' => $conf['eml_user'])
+        );
+    } catch(Exception $ex) { }
 ?>
